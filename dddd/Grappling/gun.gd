@@ -2,7 +2,7 @@ extends CharacterBody3D
 
 @onready var bullet_marker: Marker3D = %bulletMarker
 
-const LINE = preload("res://line.tscn")
+const LINE = preload("res://Grappling/line.tscn")
 
 var line: Node3D
 
