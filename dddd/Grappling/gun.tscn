@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cefb1dpi7mgqj"]
 
-[ext_resource type="Script" uid="uid://cbjfm4ct77m8e" path="res://character_body_3d.gd" id="1_dk5gl"]
-[ext_resource type="PackedScene" uid="uid://uv8kb4x0yyt" path="res://blasterM.glb" id="2_kw0bs"]
+[ext_resource type="Script" uid="uid://cbjfm4ct77m8e" path="res://Character/character_body_3d.gd" id="1_dk5gl"]
+[ext_resource type="PackedScene" uid="uid://uv8kb4x0yyt" path="res://Grappling/blasterM.glb" id="2_kw0bs"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8iju2"]
 size = Vector3(0.19433594, 0.31274414, 0.68310547)

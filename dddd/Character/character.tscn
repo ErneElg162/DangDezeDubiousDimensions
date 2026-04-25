@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://b55le64shefxu"]
 
-[ext_resource type="Script" uid="uid://cbjfm4ct77m8e" path="res://character_body_3d.gd" id="1_glpr6"]
-[ext_resource type="PackedScene" uid="uid://cefb1dpi7mgqj" path="res://gun.tscn" id="2_pjt0s"]
-[ext_resource type="Script" uid="uid://dq82ferkgjkr2" path="res://gun.gd" id="3_wa5vi"]
+[ext_resource type="Script" uid="uid://cbjfm4ct77m8e" path="res://Character/character_body_3d.gd" id="1_glpr6"]
+[ext_resource type="PackedScene" uid="uid://cefb1dpi7mgqj" path="res://Grappling/gun.tscn" id="2_pjt0s"]
+[ext_resource type="Script" uid="uid://dq82ferkgjkr2" path="res://Grappling/gun.gd" id="3_wa5vi"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_pjt0s"]
 

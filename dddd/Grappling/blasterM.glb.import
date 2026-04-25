@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://uv8kb4x0yyt"
-path="res://.godot/imported/blasterM.glb-e127968577da99510394ca6cd3add1f7.scn"
+path="res://.godot/imported/blasterM.glb-7b2cd52e20ad3f3ad115477f821e5f8d.scn"
 
 [deps]
 
-source_file="res://blasterM.glb"
-dest_files=["res://.godot/imported/blasterM.glb-e127968577da99510394ca6cd3add1f7.scn"]
+source_file="res://Grappling/blasterM.glb"
+dest_files=["res://.godot/imported/blasterM.glb-7b2cd52e20ad3f3ad115477f821e5f8d.scn"]
 
 [params]
 
@@ -41,17 +41,17 @@ _subresources={
 "materials": {
 "dark": {
 "use_external/enabled": true,
-"use_external/fallback_path": "res://dark.tres",
+"use_external/fallback_path": "res://Grappling/dark.tres",
 "use_external/path": "uid://jote7tvmugt"
 },
 "metal": {
 "use_external/enabled": true,
-"use_external/fallback_path": "res://metal.tres",
+"use_external/fallback_path": "res://Grappling/metal.tres",
 "use_external/path": "uid://cgun2whtiiwas"
 },
 "yellow": {
 "use_external/enabled": true,
-"use_external/fallback_path": "res://yellow.tres",
+"use_external/fallback_path": "res://Grappling/yellow.tres",
 "use_external/path": "uid://be55vfs1ht56o"
 }
 }
