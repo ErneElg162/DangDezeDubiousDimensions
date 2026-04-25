@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://cehr5k547rkuv"]
+[gd_scene format=3 uid="uid://b55le64shefxu"]
 
 [ext_resource type="Script" uid="uid://cbjfm4ct77m8e" path="res://character_body_3d.gd" id="1_glpr6"]
 [ext_resource type="PackedScene" uid="uid://cefb1dpi7mgqj" path="res://gun.tscn" id="2_pjt0s"]
