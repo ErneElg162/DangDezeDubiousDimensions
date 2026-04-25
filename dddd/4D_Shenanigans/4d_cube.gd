@@ -15,11 +15,11 @@ func _process(delta: float) -> void:
 	else:
 		col.disabled = true
 		
-	if dist < width - Global.threshold:
+	if dist <= width:
 		mesh.transparency = 0
 		
 	elif dist <= width + Global.threshold:
-		mesh.transparency = 0.75 + (dist - width + Global.threshold) / (2 * Global.threshold)
+		mesh.transparency = (dist - width) / Global.threshold
 		
 	else:
 		mesh.transparency = 1

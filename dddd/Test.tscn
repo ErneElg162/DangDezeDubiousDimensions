@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bi66y3pmp3ran"]
 
-[ext_resource type="Script" uid="uid://dur728x4pb7lo" path="res://test.gd" id="1_njov2"]
-[ext_resource type="PackedScene" path="res://character.tscn" id="3_2au82"]
+[ext_resource type="PackedScene" uid="uid://cmagrieuuyohl" path="res://4D_Shenanigans/4D_Cube.tscn" id="1_myinc"]
+[ext_resource type="PackedScene" uid="uid://b55le64shefxu" path="res://character.tscn" id="3_2au82"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_njov2"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -16,8 +16,11 @@ sky = SubResource("Sky_2au82")
 tonemap_mode = 2
 glow_enabled = true
 
+[sub_resource type="BoxMesh" id="BoxMesh_2au82"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8tn2x"]
+
 [node name="Node3D" type="Node3D" unique_id=575358672]
-script = ExtResource("1_njov2")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1285410931]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
@@ -28,3 +31,22 @@ environment = SubResource("Environment_8tn2x")
 
 [node name="CharacterBody3D" parent="." unique_id=1945213248 instance=ExtResource("3_2au82")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35411048, 1.1486564, 4.4342227)
+
+[node name="Wall2" parent="." unique_id=469112148 instance=ExtResource("1_myinc")]
+transform = Transform3D(4.8695126, 0, 0, 0, 0.21537632, 0, 0, 0, 3.49847, -0.8647528, 2.7704172, -0.10638492)
+width = 0.5
+w_cent = 0.8
+
+[node name="Wall" parent="." unique_id=1118426067 instance=ExtResource("1_myinc")]
+transform = Transform3D(2.2066972, 0, 0, 0, 0.33952144, 0, 0, 0, 3.8940902, -0.2674594, 1.4103775, 0.022793293)
+width = 0.2
+w_cent = 0.05
+
+[node name="Floor" type="StaticBody3D" parent="." unique_id=1693013999]
+transform = Transform3D(4.74461, 0, 0, 0, 0.6177273, 0, 0, 0, 17.509895, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor" unique_id=1156718894]
+mesh = SubResource("BoxMesh_2au82")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=707727836]
+shape = SubResource("BoxShape3D_8tn2x")
