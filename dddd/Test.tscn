@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bi66y3pmp3ran"]
 
-[ext_resource type="PackedScene" uid="uid://cmagrieuuyohl" path="res://4D_Shenanigans/4D_Cube.tscn" id="1_myinc"]
 [ext_resource type="Script" uid="uid://dur728x4pb7lo" path="res://test.gd" id="1_njov2"]
+[ext_resource type="PackedScene" path="res://character.tscn" id="3_2au82"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_njov2"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -26,8 +26,5 @@ shadow_enabled = true
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1670382051]
 environment = SubResource("Environment_8tn2x")
 
-[node name="StaticBody3D" parent="." unique_id=469112148 instance=ExtResource("1_myinc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.060655594, 0, 0.08145285)
-
-[node name="Camera3D" type="Camera3D" parent="." unique_id=2075463795]
-transform = Transform3D(1, 0, 0, 0, 0.93060935, 0.366014, 0, -0.366014, 0.93060935, 0, 1.1730723, 2.6784358)
+[node name="CharacterBody3D" parent="." unique_id=1945213248 instance=ExtResource("3_2au82")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35411048, 1.1486564, 4.4342227)

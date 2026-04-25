@@ -4,7 +4,7 @@
 
 [sub_resource type="BoxMesh" id="BoxMesh_gioj6"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_f8w4y"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_6h8h0"]
 
 [node name="StaticBody3D" type="StaticBody3D" unique_id=469112148 node_paths=PackedStringArray("mesh", "col")]
 script = ExtResource("1_6h8h0")
@@ -16,4 +16,4 @@ width = 1.0
 mesh = SubResource("BoxMesh_gioj6")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=767307187]
-shape = SubResource("SphereShape3D_f8w4y")
+shape = SubResource("BoxShape3D_6h8h0")
