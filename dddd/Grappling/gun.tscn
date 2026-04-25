@@ -3,9 +3,6 @@
 [ext_resource type="Script" uid="uid://cbjfm4ct77m8e" path="res://Character/character_body_3d.gd" id="1_dk5gl"]
 [ext_resource type="PackedScene" uid="uid://uv8kb4x0yyt" path="res://Grappling/blasterM.glb" id="2_kw0bs"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_8iju2"]
-size = Vector3(0.19433594, 0.31274414, 0.68310547)
-
 [node name="Gun" type="CharacterBody3D" unique_id=1647983618]
 script = ExtResource("1_dk5gl")
 
@@ -13,10 +10,6 @@ script = ExtResource("1_dk5gl")
 
 [node name="blasterM2" type="MeshInstance3D" parent="blasterM2" unique_id=1533241305]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.16365817, 0, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1711766701]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.14939123, -0.0039574206, -0.14442986)
-shape = SubResource("BoxShape3D_8iju2")
 
 [node name="bulletMarker" type="Marker3D" parent="." unique_id=1156323843]
 unique_name_in_owner = true
