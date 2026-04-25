@@ -18,11 +18,11 @@ mesh = SubResource("CapsuleMesh_pjt0s")
 shape = SubResource("CapsuleShape3D_wa5vi")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=518740108]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.53458744, -0.52446365)
 
-[node name="RayCast3D" type="RayCast3D" parent="Camera3D" unique_id=1202798299]
-transform = Transform3D(1, 0, 0, 0, -0.9973793, -0.07235045, 0, 0.07235045, -0.9973793, 0.04014218, 0.55114096, 0)
-target_position = Vector3(0, 0, 20)
+[node name="RayCast3D" type="RayCast3D" parent="Camera3D" unique_id=672320494]
+target_position = Vector3(0, 0, -20)
 
 [node name="Gun" parent="." unique_id=1647983618 instance=ExtResource("2_pjt0s")]
-transform = Transform3D(-0.99736536, 0, -0.07254199, 0, 1, 0, 0.07254199, 0, -0.99736536, 0.13590646, -0.30172688, -0.7024858)
+transform = Transform3D(-0.99736536, 0, -0.07254199, 0, 1, 0, 0.07254199, 0, -0.99736536, 0.13590646, 0.10938889, -0.7024858)
 script = ExtResource("3_wa5vi")
