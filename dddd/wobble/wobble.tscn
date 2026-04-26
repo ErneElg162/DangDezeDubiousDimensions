@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://goltp50idios"]
+
+[ext_resource type="Script" uid="uid://cuqpgtg54xr2l" path="res://wobble/wobble.gd" id="1_nl2vj"]
+[ext_resource type="Shader" uid="uid://da4c3fasd1ulo" path="res://wobble/wobble.gdshader" id="1_r1prp"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_r1prp"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_nl2vj"]
+sky_material = SubResource("ProceduralSkyMaterial_r1prp")
+
+[sub_resource type="Environment" id="Environment_sok5a"]
+background_mode = 2
+sky = SubResource("Sky_nl2vj")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_nl2vj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nl2vj"]
+render_priority = 0
+shader = ExtResource("1_r1prp")
+shader_parameter/strength = 0.5
+shader_parameter/amount = 0.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_g2enp"]
+
+[node name="Wobble" type="Node3D" unique_id=789225924]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1731141493]
+environment = SubResource("Environment_sok5a")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1356562096]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1618035749]
+transform = Transform3D(0.88827276, -0.23063634, 0.39721322, 0, 0.86479235, 0.5021297, -0.4593163, -0.4460281, 0.7681715, 1.066839, 1.2014204, 2.0073657)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=639445599]
+script = ExtResource("1_nl2vj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=761425169]
+mesh = SubResource("BoxMesh_nl2vj")
+surface_material_override/0 = SubResource("ShaderMaterial_nl2vj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1153310705]
+shape = SubResource("BoxShape3D_g2enp")
