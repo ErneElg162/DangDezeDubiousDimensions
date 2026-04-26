@@ -13,6 +13,9 @@ var is_wobbling: bool = false
 
 func _ready() -> void:
 	material = mesh.get_active_material(0) as ShaderMaterial
+	
+	if get_collision_layer_value(2):
+		material.set_shader_parameter("grabbable", true)
 
 func wobble(delta: float):
 	if not is_wobbling:

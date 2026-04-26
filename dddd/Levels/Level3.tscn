@@ -47,9 +47,13 @@ shader_parameter/alpha_threshold = 0.0
 [sub_resource type="CylinderMesh" id="CylinderMesh_yd8fq"]
 material = SubResource("ShaderMaterial_cfl6m")
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_yd8fq"]
+size = Vector3(24.822144, 1, 31.794006)
+
 [node name="Level3" type="Node3D" unique_id=1594867307]
 script = ExtResource("1_yd8fq")
 death_plane = -10.0
+next_level = "res://Levels/Level4.tscn"
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=57716086]
 transform = Transform3D(1, 0, 0, 0, 0.079711854, 0.9968178, 0, -0.99681807, 0.079711854, 0, 39.5416, 3.9680986)
@@ -93,3 +97,12 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.5333035, 44.36101, -2
 collision_layer = 2
 width = 0.1
 w_cent = 0.4
+
+[node name="END" type="Area3D" parent="." unique_id=1742987631]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0674896, -52.85749)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="END" unique_id=1340474780]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7460995, -3.9826984, -5.246788)
+shape = SubResource("BoxShape3D_yd8fq")
+
+[connection signal="body_entered" from="END" to="." method="_on_end_entered"]

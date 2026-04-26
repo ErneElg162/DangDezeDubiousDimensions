@@ -53,9 +53,13 @@ material = SubResource("ShaderMaterial_cfl6m")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xryqd"]
 albedo_texture = ExtResource("6_87eea")
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_87eea"]
+size = Vector3(24.822144, 1, 31.794006)
+
 [node name="Node3D" type="Node3D" unique_id=575358672]
 script = ExtResource("1_2oyfs")
 death_plane = -30.0
+next_level = "res://Levels/Level2.tscn"
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1285410931]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25000003, 0.49720418, -0.6930039, 0.5220476, -0.052802205, 0.57640755, 0.8154547, 0, 10.819079, -8.057935)
@@ -115,3 +119,12 @@ mesh = SubResource("CylinderMesh_87eea")
 transform = Transform3D(-9.214272e-08, 0, 5.008334, 0, 6.6313014, 0, -2.1079798, 0, -2.1892124e-07, 1.6000369, -6.4364038, -60.352974)
 mesh = SubResource("BoxMesh_cfl6m")
 surface_material_override/0 = SubResource("StandardMaterial3D_xryqd")
+
+[node name="END" type="Area3D" parent="." unique_id=1593072682]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -19.581224, -109.89125)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="END" unique_id=890728270]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7460995, -3.9826984, -5.246788)
+shape = SubResource("BoxShape3D_87eea")
+
+[connection signal="body_entered" from="END" to="." method="_on_end_entered"]
