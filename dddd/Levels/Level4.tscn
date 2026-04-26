@@ -1,0 +1,101 @@
+[gd_scene format=3 uid="uid://dnb2jnu32pngm"]
+
+[ext_resource type="Script" uid="uid://8gb8wk8nalan" path="res://Levels/Level.gd" id="1_70wcc"]
+[ext_resource type="Shader" uid="uid://8wxfafdgx2c0" path="res://Shaders/Aurora.gdshader" id="2_rkafn"]
+[ext_resource type="Shader" uid="uid://dn8yr0xde85ku" path="res://Shaders/Firey.gdshader" id="3_2qv2g"]
+[ext_resource type="PackedScene" uid="uid://cmagrieuuyohl" path="res://4D_Shenanigans/4D_Cube.tscn" id="4_2qv2g"]
+[ext_resource type="PackedScene" uid="uid://b55le64shefxu" path="res://Character/character.tscn" id="5_0sogr"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0sogr"]
+shader = ExtResource("2_rkafn")
+shader_parameter/night_color = Color(0.23894432, 0.391847, 0.63326514, 1)
+shader_parameter/horizon_color = Color(0.02, 0.04, 0.08, 1)
+shader_parameter/aurora_green = Color(0, 1, 0.45, 1)
+shader_parameter/aurora_blue = Color(0.15, 0.25, 1, 1)
+shader_parameter/aurora_purple = Color(0.55, 0.05, 1, 1)
+shader_parameter/aurora_intensity = 2.0
+shader_parameter/aurora_speed = 0.08
+shader_parameter/aurora_scale = 7.0
+shader_parameter/aurora_height = 0.25
+shader_parameter/aurora_thickness = 0.18
+shader_parameter/curtain_sharpness = 1.8
+
+[sub_resource type="Sky" id="Sky_87eea"]
+sky_material = SubResource("ShaderMaterial_0sogr")
+
+[sub_resource type="Environment" id="Environment_5brs8"]
+background_mode = 2
+sky = SubResource("Sky_87eea")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cfl6m"]
+render_priority = 0
+shader = ExtResource("3_2qv2g")
+shader_parameter/speed = 1.0
+shader_parameter/octaves = 5.0
+shader_parameter/amp_start = 1.5
+shader_parameter/amp_change = 1.5
+shader_parameter/freq_change = 1.8
+shader_parameter/distortion = 1.2
+shader_parameter/scale = 3.0
+shader_parameter/slice = 1.0
+shader_parameter/width = 1.0
+shader_parameter/height = 1.0
+shader_parameter/alpha_threshold = 0.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_qgpl5"]
+material = SubResource("ShaderMaterial_cfl6m")
+
+[node name="Level4" type="Node3D" unique_id=1160837821]
+script = ExtResource("1_70wcc")
+death_plane = -10.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1195040699]
+transform = Transform3D(1, 0, 0, 0, 0.079711854, 0.9968178, 0, -0.99681807, 0.079711854, 0, 39.5416, 3.9680986)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=10593129]
+environment = SubResource("Environment_5brs8")
+
+[node name="Fire" type="MeshInstance3D" parent="." unique_id=785602136]
+transform = Transform3D(1000, 0, 0, 0, 1000, 0, 0, 0, 1000, 0, 546.45844, -88.62448)
+mesh = SubResource("CylinderMesh_qgpl5")
+
+[node name="Player" parent="." unique_id=1945213248 instance=ExtResource("5_0sogr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.04749441, 1.1032953, 0.24778616)
+
+[node name="StaticBody3D" parent="." unique_id=469112148 instance=ExtResource("4_2qv2g")]
+transform = Transform3D(8.374623, 0, 0, 0, 0.20659035, 0, 0, 0, 7.1336474, 0, 0, 0)
+
+[node name="StaticBody3D2" parent="." unique_id=1669710578 instance=ExtResource("4_2qv2g")]
+transform = Transform3D(10.48145, 0, 0, 0, 7.7505617, 0, 0, 0, 0.13696851, 0, 3.5754786, -22.400604)
+collision_layer = 3
+width = 0.1
+
+[node name="StaticBody3D3" parent="." unique_id=2002450919 instance=ExtResource("4_2qv2g")]
+transform = Transform3D(10.48145, 0, 0, 0, 0.22150972, 0, 0, 0, 8.361422, 0, 14.050445, -32.534027)
+collision_layer = 3
+width = 0.12
+w_cent = 0.2
+
+[node name="StaticBody3D4" parent="." unique_id=912467986 instance=ExtResource("4_2qv2g")]
+transform = Transform3D(10.48145, 0, 0, 0, 0.1601389, 5.77697, 0, -0.15304273, 6.044831, 0, 27.036953, -45.956577)
+collision_layer = 3
+width = 0.05
+w_cent = 0.3
+
+[node name="StaticBody3D5" parent="." unique_id=1962452094 instance=ExtResource("4_2qv2g")]
+transform = Transform3D(10.48145, 0, 0, 0, 7.7505617, 0, 0, 0, 0.13696851, 0, 38.42612, -40.725735)
+collision_layer = 3
+width = 0.05
+w_cent = 0.45
+
+[node name="StaticBody3D6" parent="." unique_id=142560505 instance=ExtResource("4_2qv2g")]
+transform = Transform3D(10.48145, 0, 0, 0, 0.1601389, 5.77697, 0, -0.15304273, 6.044831, 0, 50.91089, -59.323277)
+collision_layer = 3
+width = 0.4
+w_cent = 1.0
+
+[node name="StaticBody3D7" parent="." unique_id=491568519 instance=ExtResource("4_2qv2g")]
+transform = Transform3D(8.374623, 0, 0, 0, 0.20659035, 0, 0, 0, 7.1336474, 0, 43.93863, -91.64101)

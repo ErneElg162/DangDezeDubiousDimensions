@@ -10,14 +10,15 @@ var buffer = false
 var buffer_time = 0.1
 
 @onready var camera: Camera3D = $Camera3D
-@export var ray: RayCast3D
-@export var rope: Node3D
+@onready var ray: RayCast3D = $Camera3D/RayCast3D
+@onready var rope: Node3D = $Camera3D/GrapplingGun/Rope
+@onready var gun: Node3D = $Camera3D/GrapplingGun
 
-var retract_vel = 100.0
+@export var ALLOW_GRAPPLE: bool = true
+
+var retract_vel = 60.0
 var rope_len = 1.0
 var K = 5
-#var stiffness = 10.0
-#var damping = 1.0
 
 var MAX_SPEED = 30
 var max_grap = 210
@@ -32,6 +33,14 @@ const JUMP_VELOCITY = 10.0
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	
+	if not ALLOW_GRAPPLE:
+		ray.visible = false
+		gun.visible = false
+	
+	else:
+		ray.visible = true
+		gun.visible = true
 
 func launch():
 	if ray.is_colliding():
@@ -44,8 +53,6 @@ func retract():
 func handle_grapple(delta: float, shrink: bool, move_vec: Vector3):	
 	var target_dir = position.direction_to(target)
 	var target_dist = position.distance_to(target)
-	
-	var displacement = target_dist - rope_len
 	
 	var force = K * (target_dist - rope_len)
 	
@@ -156,7 +163,7 @@ func _physics_process(delta: float) -> void:
 		move_vec.x = move_toward(move_vec.x, 0, SPEED)
 		move_vec.z = move_toward(move_vec.z, 0, SPEED)
 	
-	if Input.is_action_pressed("shoot"):
+	if launched and ALLOW_GRAPPLE:
 		if Input.is_action_pressed("pull"):
 			handle_grapple(delta, true, move_vec)
 		

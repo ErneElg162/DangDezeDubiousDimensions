@@ -1,0 +1,83 @@
+[gd_scene format=3 uid="uid://bfwbr4nqm5ewo"]
+
+[ext_resource type="Shader" uid="uid://8wxfafdgx2c0" path="res://Shaders/Aurora.gdshader" id="1_506po"]
+[ext_resource type="Script" uid="uid://8gb8wk8nalan" path="res://Levels/Level.gd" id="1_v115i"]
+[ext_resource type="Shader" uid="uid://dn8yr0xde85ku" path="res://Shaders/Firey.gdshader" id="2_v115i"]
+[ext_resource type="PackedScene" uid="uid://cmagrieuuyohl" path="res://4D_Shenanigans/4D_Cube.tscn" id="3_jglcl"]
+[ext_resource type="PackedScene" uid="uid://b55le64shefxu" path="res://Character/character.tscn" id="4_w0h0a"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m3ha0"]
+shader = ExtResource("1_506po")
+shader_parameter/night_color = Color(0.23894432, 0.391847, 0.63326514, 1)
+shader_parameter/horizon_color = Color(0.02, 0.04, 0.08, 1)
+shader_parameter/aurora_green = Color(0, 1, 0.45, 1)
+shader_parameter/aurora_blue = Color(0.15, 0.25, 1, 1)
+shader_parameter/aurora_purple = Color(0.55, 0.05, 1, 1)
+shader_parameter/aurora_intensity = 2.0
+shader_parameter/aurora_speed = 0.08
+shader_parameter/aurora_scale = 7.0
+shader_parameter/aurora_height = 0.25
+shader_parameter/aurora_thickness = 0.18
+shader_parameter/curtain_sharpness = 1.8
+
+[sub_resource type="Sky" id="Sky_2au82"]
+sky_material = SubResource("ShaderMaterial_m3ha0")
+
+[sub_resource type="Environment" id="Environment_vd23k"]
+background_mode = 2
+sky = SubResource("Sky_2au82")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2oyfs"]
+render_priority = 0
+shader = ExtResource("2_v115i")
+shader_parameter/speed = 1.0
+shader_parameter/octaves = 5.0
+shader_parameter/amp_start = 1.5
+shader_parameter/amp_change = 1.5
+shader_parameter/freq_change = 1.8
+shader_parameter/distortion = 1.2
+shader_parameter/scale = 3.0
+shader_parameter/slice = 1.0
+shader_parameter/width = 1.0
+shader_parameter/height = 1.0
+shader_parameter/alpha_threshold = 0.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_x7rwe"]
+material = SubResource("ShaderMaterial_2oyfs")
+
+[node name="Level2" type="Node3D" unique_id=1519670322]
+script = ExtResource("1_v115i")
+death_plane = -6.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1002728536]
+transform = Transform3D(-0.8660254, -0.43301278, 0.24999999, 0.18493018, 0.18714845, 0.9647676, -0.46454376, 0.8817457, -0.08199823, 0, 10.819079, -8.057935)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=10546891]
+environment = SubResource("Environment_vd23k")
+
+[node name="Fire" type="MeshInstance3D" parent="." unique_id=452953595]
+transform = Transform3D(1000, 0, 0, 0, 1000, 0, 0, 0, 1000, 0, 546.45844, -88.62448)
+mesh = SubResource("CylinderMesh_x7rwe")
+
+[node name="Player" parent="." unique_id=1945213248 instance=ExtResource("4_w0h0a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.07320404, 1.5, 0.15523434)
+ALLOW_GRAPPLE = false
+
+[node name="StaticBody3D" parent="." unique_id=469112148 instance=ExtResource("3_jglcl")]
+transform = Transform3D(7.9343524, 0, 0, 0, 0.43162197, 0, 0, 0, 16.30199, 0, 0, -4.8555584)
+
+[node name="StaticBody3D2" parent="." unique_id=138355020 instance=ExtResource("3_jglcl")]
+transform = Transform3D(6.2181826, 0, 0, 0, 0.20036894, 0, 0, 0, 28.898432, 0.567883, 3.884759, -24.790571)
+width = 0.1
+w_cent = 0.2
+
+[node name="StaticBody3D3" parent="." unique_id=2110713645 instance=ExtResource("3_jglcl")]
+transform = Transform3D(7.9343524, 0, 0, 0, 0.43162197, 0, 0, 0, 28.87553, 0, 0, -49.602505)
+width = 0.3
+w_cent = 0.5
+
+[node name="StaticBody3D4" parent="." unique_id=346761029 instance=ExtResource("3_jglcl")]
+transform = Transform3D(7.9343524, 0, 0, 0, 0.43162197, 0, 0, 0, 8.535366, 0, 0, -72.603424)
