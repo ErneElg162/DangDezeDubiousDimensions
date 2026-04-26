@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://bi66y3pmp3ran"]
 
-[ext_resource type="PackedScene" uid="uid://cmagrieuuyohl" path="res://4D_Shenanigans/4D_Cube.tscn" id="1_myinc"]
-[ext_resource type="PackedScene" uid="uid://b55le64shefxu" path="res://Character/character.tscn" id="3_2au82"]
+[ext_resource type="Script" uid="uid://dur728x4pb7lo" path="res://test.gd" id="1_njov2"]
+[ext_resource type="PackedScene" uid="uid://cehr5k547rkuv" path="res://character.tscn" id="3_2au82"]
+[ext_resource type="PackedScene" uid="uid://cmagrieuuyohl" path="res://4D_Shenanigans/4D_Cube.tscn" id="3_8tn2x"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_njov2"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -35,8 +36,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8583791, 7.752048, 1.60808
 [node name="Floor" type="StaticBody3D" parent="." unique_id=1693013999]
 transform = Transform3D(40.69784, 0, 0, 0, 0.6177273, 0, 0, 0, 48.146442, 0, 0, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor" unique_id=1156718894]
-mesh = SubResource("BoxMesh_2au82")
+[node name="StaticBody3D4" parent="." unique_id=1938538237 instance=ExtResource("3_8tn2x")]
+transform = Transform3D(19.539944, 0, 0.21325205, 0, 39.999996, 0, -4.2650414, 0, 0.9769972, -21.085945, 10.029869, -99.252106)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=707727836]
 shape = SubResource("BoxShape3D_8tn2x")
