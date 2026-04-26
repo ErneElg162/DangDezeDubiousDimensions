@@ -27,7 +27,13 @@ target_position = Vector3(0, 0, -20)
 
 [node name="GrapplingGun" parent="Camera3D" unique_id=2126913745 instance=ExtResource("2_pjt0s")]
 transform = Transform3D(-0.99999994, 0, -8.742277e-08, 0, 1, 0, 8.742277e-08, 0, -0.99999994, 0.4011854, -0.53458744, -0.42904818)
-script = null
 
 [node name="Rope" parent="Camera3D/GrapplingGun" unique_id=946064286 instance=ExtResource("3_jkkns")]
 transform = Transform3D(-0.9999995, 0, 8.7422734e-08, 0, 1, 0, -8.7422734e-08, 0, -0.9999995, -0.03041187, 0.24177316, 0.31479025)
+
+[node name="CoyoteTimer" type="Timer" parent="." unique_id=1791947565]
+
+[node name="JumpBufferTimer" type="Timer" parent="." unique_id=1345703694]
+
+[connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]
+[connection signal="timeout" from="JumpBufferTimer" to="." method="_on_jump_buffer_timer_timeout"]

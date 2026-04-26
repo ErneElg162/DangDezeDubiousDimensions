@@ -42,12 +42,15 @@ func _process(delta: float) -> void:
 		col.disabled = true
 		
 	if dist <= width:
+		visible = true
 		mesh.transparency = 0
 		
 	elif dist <= width + Global.threshold:
+		visible = true
 		mesh.transparency = (dist - width) / Global.threshold
 		
 	else:
 		mesh.transparency = 1
+		visible = false
 		
 	wobble(delta)

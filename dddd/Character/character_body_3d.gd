@@ -2,6 +2,13 @@ extends CharacterBody3D
 
 var look_sensitivity: float = 0.005
 
+@onready var coyote_timer: Timer = $CoyoteTimer
+@onready var jump_buffer_timer: Timer = $JumpBufferTimer
+var coyote_time = 0.15
+var can_jump = true
+var buffer = false
+var buffer_time = 0.1
+
 @onready var camera: Camera3D = $Camera3D
 @export var ray: RayCast3D
 @export var rope: Node3D
@@ -11,13 +18,13 @@ var rope_len = 2.0
 var stiffness = 5.0
 var damping = 5.0
 
-var MAX_SPEED = 15
+var MAX_SPEED = 30
 
 var target: Vector3
 var launched = false
 
-const SPEED = 5.0
-const JUMP_VELOCITY = 5.0
+const SPEED = 15.0
+const JUMP_VELOCITY = 10.0
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -95,11 +102,33 @@ func _unhandled_input(event):
 func _physics_process(delta: float) -> void:	
 	# Add the gravity.
 	if not is_on_floor():
-		velocity += get_gravity() * delta
+		if not buffer and Input.is_action_just_pressed("ui_accept"):
+			buffer = true
+			jump_buffer_timer.start(buffer_time)
+		
+		if can_jump:
+			if coyote_timer.is_stopped():
+				coyote_timer.start(coyote_time)
+			
+		if velocity.y < 0:
+			velocity += 2 * get_gravity() * delta
+		
+		else:
+			velocity += 1.5 * get_gravity() * delta
+	
+	else:
+		can_jump = true
+		coyote_timer.stop()
 
 	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+	if Input.is_action_just_pressed("ui_accept") and (is_on_floor() or can_jump):
 		velocity.y = JUMP_VELOCITY
+	
+	elif can_jump and buffer:
+		velocity.y = JUMP_VELOCITY
+		buffer = false
+		jump_buffer_timer.stop()
+		
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -135,3 +164,10 @@ func _physics_process(delta: float) -> void:
 		velocity *= MAX_SPEED / velocity.length()
 
 	move_and_slide()
+
+func _on_coyote_timer_timeout():
+	can_jump = false
+
+
+func _on_jump_buffer_timer_timeout() -> void:
+	buffer = false
