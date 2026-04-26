@@ -3,17 +3,73 @@ extends CharacterBody3D
 var look_sensitivity: float = 0.005
 
 @onready var camera: Camera3D = $Camera3D
-@onready var ray_cast_3d: RayCast3D = $Camera3D/RayCast3D
-@onready var gun: CharacterBody3D = $Gun
+@export var ray: RayCast3D
+@export var rope: Node3D
 
+var retract_vel = 100.0
+var rope_len = 2.0
+var stiffness = 5.0
+var damping = 5.0
+
+var MAX_SPEED = 15
+
+var target: Vector3
+var launched = false
 
 const SPEED = 5.0
-const JUMP_VELOCITY = 4.5
-
-var activeGrap = false
+const JUMP_VELOCITY = 5.0
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+
+func launch():
+	if ray.is_colliding():
+		target = ray.get_collision_point()
+		launched = true
+
+func retract():
+	launched = false
+
+func handle_grapple(delta: float, shrink: bool):
+	if !launched:
+		return
+	
+	var target_dir = position.direction_to(target)
+	var target_dist = position.distance_to(target)
+	
+	if target_dist > 2 * rope_len:
+		retract()
+		return
+	
+	var displacement = target_dist - rope_len
+	
+	var force = Vector3.ZERO
+	
+	if displacement > 0:
+		var mag = stiffness * displacement
+		var spring_force = target_dir * mag
+		
+		var vel_dot = velocity.dot(target_dir)
+		var dang = -damping * vel_dot * target_dir
+		
+		force = spring_force * dang
+	
+	if shrink:
+		force += target_dir * retract_vel
+	
+	velocity += force * delta
+
+func update_rope():
+	if !launched:
+		rope.visible = false
+		return
+	
+	rope.visible = true
+	
+	var dist = global_position.distance_to(target)
+	
+	rope.look_at(target)
+	rope.scale = Vector3(1, 1, dist / 2)
 
 func _unhandled_input(event):
 	if event is InputEventMouseButton:
@@ -36,15 +92,7 @@ func _unhandled_input(event):
 	if event is InputEventMouseButton and event.pressed:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
-func _physics_process(delta: float) -> void:
-	
-	if Input.is_action_just_pressed("left_mouse_click") and ray_cast_3d.is_colliding() and not activeGrap:
-		activeGrap = true
-		gun.shoot(ray_cast_3d.get_collision_point())
-	elif Input.is_action_just_pressed("left_mouse_click") and activeGrap:
-		activeGrap = false
-		gun.remove_line()
-
+func _physics_process(delta: float) -> void:	
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -55,16 +103,35 @@ func _physics_process(delta: float) -> void:
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
+
+		
+	#Grappling Hook
+	if Input.is_action_just_pressed("shoot"):
+		launch()
+	
+	if Input.is_action_just_released("shoot"):
+		retract()
+	
 	var input_dir := Input.get_vector("left", "right", "forward", "back")
 	
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	
 	if direction:
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
+	
+	if Input.is_action_pressed("pull"):
+		handle_grapple(delta, true)
+	
+	else:
+		handle_grapple(delta, false)
+	
+	update_rope()
 
-	print(velocity)
+	if velocity.length() > MAX_SPEED:
+		velocity *= MAX_SPEED / velocity.length()
 
 	move_and_slide()
