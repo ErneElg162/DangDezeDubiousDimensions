@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cbjfm4ct77m8e" path="res://Character/character_body_3d.gd" id="1_glpr6"]
 [ext_resource type="PackedScene" uid="uid://ixa23ytkiif4" path="res://Grappling/gun.tscn" id="2_pjt0s"]
+[ext_resource type="PackedScene" uid="uid://dwms4i3sovcq3" path="res://Crosshair/tesseract.glb" id="2_twwou"]
 [ext_resource type="PackedScene" uid="uid://bn41l7ybolt0x" path="res://Grappling/Rope.tscn" id="3_jkkns"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_pjt0s"]
@@ -21,6 +22,9 @@ shape = SubResource("CapsuleShape3D_wa5vi")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=518740108]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5888145, 0)
+
+[node name="tesseract" parent="Camera3D" unique_id=526112722 instance=ExtResource("2_twwou")]
+transform = Transform3D(0.06, 0, 0, 0, 0.06, 0, 0, 0, 0.06, 0, 0, -3)
 
 [node name="RayCast3D" type="RayCast3D" parent="Camera3D" unique_id=672320494]
 target_position = Vector3(0, 0, -20)

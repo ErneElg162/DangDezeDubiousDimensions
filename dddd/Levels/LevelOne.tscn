@@ -66,3 +66,6 @@ transform = Transform3D(0.91946125, 0, 0, 0, 16.932127, 0, 0, 0, 31.622223, 5.49
 
 [node name="StaticBody3D12" parent="." unique_id=2009416056 instance=ExtResource("3_xaay7")]
 transform = Transform3D(0.91946125, 0, 0, 0, 16.932127, 0, 0, 0, 31.622223, -5.296877, -7.697043, -73.709335)
+
+[node name="StaticBody3D13" parent="." unique_id=1893473659 instance=ExtResource("3_xaay7")]
+transform = Transform3D(0.6461069, 0, 0, 0, 7.1300597, 0, 0, 0, 0.29616734, 0, 4.4975305, -11.631926)

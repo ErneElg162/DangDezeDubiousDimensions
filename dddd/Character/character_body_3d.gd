@@ -14,17 +14,21 @@ var buffer_time = 0.1
 @export var rope: Node3D
 
 var retract_vel = 100.0
-var rope_len = 2.0
-var stiffness = 5.0
-var damping = 5.0
+var rope_len = 1.0
+var K = 5
+#var stiffness = 10.0
+#var damping = 1.0
 
 var MAX_SPEED = 30
+var max_grap = 210
 
 var target: Vector3
 var launched = false
 
 const SPEED = 15.0
 const JUMP_VELOCITY = 10.0
+
+@onready var tesseract = $Camera3D/tesseract
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -37,34 +41,24 @@ func launch():
 func retract():
 	launched = false
 
-func handle_grapple(delta: float, shrink: bool):
-	if !launched:
-		return
-	
+func handle_grapple(delta: float, shrink: bool, move_vec: Vector3):	
 	var target_dir = position.direction_to(target)
 	var target_dist = position.distance_to(target)
 	
-	if target_dist > 2 * rope_len:
-		retract()
-		return
-	
 	var displacement = target_dist - rope_len
 	
-	var force = Vector3.ZERO
-	
-	if displacement > 0:
-		var mag = stiffness * displacement
-		var spring_force = target_dir * mag
-		
-		var vel_dot = velocity.dot(target_dir)
-		var dang = -damping * vel_dot * target_dir
-		
-		force = spring_force * dang
+	var force = K * (target_dist - rope_len)
 	
 	if shrink:
-		force += target_dir * retract_vel
+		velocity += target_dir * retract_vel * delta
 	
-	velocity += force * delta
+	if abs(force) > max_grap:
+		force = max_grap
+	
+	velocity += target_dir * force * delta
+	
+	if move_vec != Vector3.ZERO:
+		velocity += move_vec.project(target_dir.cross(target_dir.cross(move_vec)))
 
 func update_rope():
 	if !launched:
@@ -90,8 +84,13 @@ func _unhandled_input(event):
 	
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		rotate_y(-event.relative.x * look_sensitivity)
+		tesseract.rotate_y(-event.relative.x * look_sensitivity)
+		
 		camera.rotate_x(-event.relative.y * look_sensitivity)
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-80), deg_to_rad(80))
+		
+		tesseract.rotate_x(-event.relative.y * look_sensitivity)
+		tesseract.rotation.x = clamp(camera.rotation.x, deg_to_rad(-80), deg_to_rad(80))
 		
 	if Input.is_action_just_pressed("escape"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
@@ -141,28 +140,37 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_released("shoot"):
 		retract()
 	
+	var move_vec = Vector3.ZERO
+	
 	var input_dir := Input.get_vector("left", "right", "forward", "back")
 	
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	
+		
 	if direction:
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
+		move_vec.x = direction.x * SPEED
+		move_vec.z = direction.z * SPEED
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
+		move_vec.x = velocity.x
+		move_vec.z = velocity.z
+		
+		move_vec.x = move_toward(move_vec.x, 0, SPEED)
+		move_vec.z = move_toward(move_vec.z, 0, SPEED)
 	
-	if Input.is_action_pressed("pull"):
-		handle_grapple(delta, true)
+	if Input.is_action_pressed("shoot"):
+		if Input.is_action_pressed("pull"):
+			handle_grapple(delta, true, move_vec)
+		
+		else:
+			handle_grapple(delta, false, move_vec)
 	
 	else:
-		handle_grapple(delta, false)
-	
-	update_rope()
+		velocity.x = move_vec.x
+		velocity.z = move_vec.z
 
 	if velocity.length() > MAX_SPEED:
 		velocity *= MAX_SPEED / velocity.length()
 
+	update_rope()
 	move_and_slide()
 
 func _on_coyote_timer_timeout():
