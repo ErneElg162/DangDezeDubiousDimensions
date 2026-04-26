@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://bncowak3u0nxb"]
+
+[ext_resource type="Shader" uid="uid://ccbs5np41owlr" path="res://wildfire.gdshader" id="1_a202f"]
+
+[sub_resource type="Environment" id="Environment_a202f"]
+background_mode = 2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a202f"]
+render_priority = 0
+shader = ExtResource("1_a202f")
+shader_parameter/speed = 1.0
+shader_parameter/octaves = 5.0
+shader_parameter/amp_start = 1.5
+shader_parameter/amp_change = 1.5
+shader_parameter/freq_change = 1.8
+shader_parameter/distortion = 1.2
+shader_parameter/scale = 3.0
+shader_parameter/slice = 1.0
+shader_parameter/width = 1.0
+shader_parameter/height = 1.0
+shader_parameter/alpha_threshold = 0.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_4xowi"]
+material = SubResource("ShaderMaterial_a202f")
+
+[node name="Node3D" type="Node3D" unique_id=1147887074]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=601429789]
+environment = SubResource("Environment_a202f")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=442632558]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CylinderMesh_4xowi")

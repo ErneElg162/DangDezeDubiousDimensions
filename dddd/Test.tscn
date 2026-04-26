@@ -4,18 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cehr5k547rkuv" path="res://character.tscn" id="3_2au82"]
 [ext_resource type="PackedScene" uid="uid://cmagrieuuyohl" path="res://4D_Shenanigans/4D_Cube.tscn" id="3_8tn2x"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_njov2"]
-sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
-ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
-
-[sub_resource type="Sky" id="Sky_2au82"]
-sky_material = SubResource("ProceduralSkyMaterial_njov2")
-
-[sub_resource type="Environment" id="Environment_8tn2x"]
-background_mode = 2
-sky = SubResource("Sky_2au82")
-tonemap_mode = 2
-glow_enabled = true
+[sub_resource type="Environment" id="Environment_2au82"]
 
 [node name="Node3D" type="Node3D" unique_id=575358672]
 script = ExtResource("1_njov2")
@@ -25,7 +14,7 @@ transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545
 shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1670382051]
-environment = SubResource("Environment_8tn2x")
+environment = SubResource("Environment_2au82")
 
 [node name="CharacterBody3D" parent="." unique_id=1945213248 instance=ExtResource("3_2au82")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.986123, 3.6050615, 23.489902)
@@ -44,3 +33,9 @@ transform = Transform3D(19.539944, 0, 0.21325205, 0, 39.999996, 0, -4.2650414, 0
 
 [node name="StaticBody3D5" parent="." unique_id=1572255823 instance=ExtResource("3_8tn2x")]
 transform = Transform3D(19.29087, 0, 5.278472, 0, 1, 0, -5.278472, 0, 19.29087, -23.10643, -10.968736, -107.541374)
+
+[node name="StaticBody3D6" parent="." unique_id=255890569 instance=ExtResource("3_8tn2x")]
+transform = Transform3D(19.53427, 0, 12.8728695, 0, 20, 0, -4.2909565, 0, 58.60281, 1.3545599, -9.703614, 7.6276073)
+
+[node name="StaticBody3D7" parent="." unique_id=139162378 instance=ExtResource("3_8tn2x")]
+transform = Transform3D(19.53427, 0, 12.8728695, 0, 20, 0, -4.2909565, 0, 58.60281, 1.3545599, -9.703614, 7.6276073)

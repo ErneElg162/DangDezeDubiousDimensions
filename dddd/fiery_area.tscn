@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://dt1u3kchvbgyg"]
+
+[ext_resource type="Shader" uid="uid://ccbs5np41owlr" path="res://wildfire.gdshader" id="1_j7b7q"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i3h4h"]
+render_priority = 0
+shader = ExtResource("1_j7b7q")
+shader_parameter/speed = 1.0
+shader_parameter/octaves = 5.0
+shader_parameter/amp_start = 1.5
+shader_parameter/amp_change = 1.5
+shader_parameter/freq_change = 1.8
+shader_parameter/distortion = 1.2
+shader_parameter/scale = 2.999999932944
+shader_parameter/slice = 1.0
+shader_parameter/alpha_threshold = 0.0
+
+[node name="wildfire" type="Control" unique_id=833023276]
+layout_mode = 3
+anchor_right = 1.6630001
+anchor_bottom = 1.6480001
+offset_right = -309.77612
+offset_bottom = -83.90405
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1296691196]
+material = SubResource("ShaderMaterial_i3h4h")
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0, 0, 0, 1)
